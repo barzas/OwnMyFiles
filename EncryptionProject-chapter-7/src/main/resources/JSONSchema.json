@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Algorithm": {
+      "type": "string"
+    },
+    "KeyPath": {
+      "type": "string"
+    },
+    "OriginalPath": {
+      "type": "string"
+    },
+    "EncryptionPath": {
+      "type": "string"
+    },
+    "DecryptionPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Algorithm",
+    "KeyPath",
+    "OriginalPath",
+    "EncryptionPath",
+    "DecryptionPath"
+  ]
+}

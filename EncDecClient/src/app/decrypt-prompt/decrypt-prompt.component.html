@@ -1,0 +1,40 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="../assets/File_open.png"
+      class="profile-img-card"
+    />
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="filePath">Insert file path</label>
+        <input
+          type="text"
+          class="form-control"
+          name="filePath"
+          [(ngModel)]="form.filePath"
+          required
+          #filePath="ngModel"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && filePath.invalid"
+        >
+          File path is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Decrypt
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

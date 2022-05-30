@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProcessSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSDSchema.xsd">
+	<Algorithm>RepeatShiftMultiply</Algorithm>
+	<KeyPath></KeyPath>
+	<OriginalPath>C:\\Users\\shach\\eclipse-workspace\\EncryptionProject\\dirTesting</OriginalPath>
+	<EncryptionPath></EncryptionPath>
+	<DecryptionPath></DecryptionPath> 
+</ProcessSettings>
