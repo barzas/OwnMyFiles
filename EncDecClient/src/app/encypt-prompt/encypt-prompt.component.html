@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="card card-container">
+  <div class="card card-container" *ngIf="!isEncrypted">
     <img
       id="profile-img"
       src="../assets/File_Lock.png"
@@ -29,14 +29,21 @@
           File path is required!
         </div>
       </div>
-      <label for="encytion">Choose an encryption option:</label>
-      <select class="encytion" id="encytion">
-        <option value="ShiftUp">ShiftUp</option>
+      <label for="encryption">Choose an encryption option:</label>
+      <select class="encryption" id="encryption" name="encryption" [(ngModel)]="form.encryption" required #encryption="ngModel">
+        <option type="text" value="ShiftUp">ShiftUp</option>
         <option value="Xor">Xor</option>
         <option value="ShiftMultiply">ShiftMultiply</option>
         <option value="Double">Double</option>
         <option value="Repeat">Repeat</option>
       </select>
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="f.submitted && encryption.invalid"
+      >
+        Encryption type is required!
+      </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block">
           Encrypt
@@ -44,5 +51,11 @@
       </div>
     </form>
   </div>
+  <img
+    *ngIf="isEncrypted"
+    id="done-img"
+    src="../assets/V.png"
+    class="task-done-img"
+  />
 </div>
 
