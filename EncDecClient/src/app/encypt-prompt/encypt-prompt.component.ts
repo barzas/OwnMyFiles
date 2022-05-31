@@ -31,7 +31,7 @@ export class EncyptPromptComponent implements OnInit {
   }
 
   succes() {
-    window.location.reload();
+    // window.location.reload();
   }
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActionController {
     
     @PostMapping("/encrypt")
-    public ResponseEntity<?> encryptFile(@RequestBody EncryptRequest encryptRequest) {
+    public ResponseEntity<?> encryptFile(@Valid @RequestBody EncryptRequest encryptRequest) {
         //TODO
         return ResponseEntity.ok(new MessageResponse("Encrypt file Succesfull"));
     }

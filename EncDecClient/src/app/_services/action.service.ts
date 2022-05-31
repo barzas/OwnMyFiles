@@ -24,7 +24,7 @@ export class ActionService {
     return this.http.post(ACT_API + 'encrypt', {
       username: this.username,
       path: credentials.filePath,
-      type: credentials.encryption
+      enctype: credentials.type
     }, httpOptions);
   }
 

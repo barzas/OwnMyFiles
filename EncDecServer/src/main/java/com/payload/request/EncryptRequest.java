@@ -10,15 +10,15 @@ public class EncryptRequest {
     private String path;
 
     @NotBlank
-    private String type;
+    private String enctype;
 
     public String getUsername() {
-		return username;
-	}
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPath() {
         return path;
@@ -28,11 +28,12 @@ public class EncryptRequest {
         this.path = path;
     }
 
-    public String getTypeOfEncrypt() {
-        return type;
+    public String getEnctype() {
+        return enctype;
     }
 
-    public void setTypeOfEncrypt(String typeOfEncrypt) {
-        this.type = typeOfEncrypt;
+    public void setEnctype(String enctype) {
+        this.enctype = enctype;
     }
+  
 }

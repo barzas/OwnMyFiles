@@ -29,18 +29,18 @@
           File path is required!
         </div>
       </div>
-      <label for="encryption">Choose an encryption option:</label>
-      <select class="encryption" id="encryption" name="encryption" [(ngModel)]="form.encryption" required #encryption="ngModel">
+      <label for="type">Choose an encryption option:</label>
+      <select class="encryption" id="type" name="type" [(ngModel)]="form.type" required #type="ngModel">
         <option type="text" value="ShiftUp">ShiftUp</option>
-        <option value="Xor">Xor</option>
-        <option value="ShiftMultiply">ShiftMultiply</option>
-        <option value="Double">Double</option>
-        <option value="Repeat">Repeat</option>
+        <option type="text" value="Xor">Xor</option>
+        <option type="text" value="ShiftMultiply">ShiftMultiply</option>
+        <option type="text" value="Double">Double</option>
+        <option type="text" value="Repeat">Repeat</option>
       </select>
       <div
         class="alert alert-danger"
         role="alert"
-        *ngIf="f.submitted && encryption.invalid"
+        *ngIf="f.submitted && type.invalid"
       >
         Encryption type is required!
       </div>
@@ -51,11 +51,15 @@
       </div>
     </form>
   </div>
-  <img
-    *ngIf="isEncrypted"
-    id="done-img"
-    src="../assets/V.png"
-    class="task-done-img"
-  />
+  <div class="card card-container" *ngIf="isEncrypted">
+    <img
+      id="done-img"
+      src="../assets/V.png"
+      class="task-done-img"
+    />
+    <div class="alert alert-success">
+      Encrypted Success!!
+    </div>
+  </div>
 </div>
 
