@@ -30,7 +30,8 @@ export class ActionService {
 
   decrypt(credentials): Observable<any> {
     return this.http.post(ACT_API + 'decrypt', {
-      path: credentials.path
+      username: this.username,
+      path: credentials.filePath
     }, httpOptions);
   }
 }
