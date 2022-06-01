@@ -36,7 +36,7 @@ public class ActionController {
         asyncDirectoryProcessor.addObserver(asyncObserver);
 
         try {
-            asyncDirectoryProcessor.encryptDirectory(userAction.getPath());
+            asyncDirectoryProcessor.encryptDirectory(encryptRequest.getPath());
         } catch (InvalidEncryptionAlgorithmTypeException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

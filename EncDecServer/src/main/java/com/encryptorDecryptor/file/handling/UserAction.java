@@ -23,18 +23,18 @@ public class UserAction {
     public IEncryptionAlgorithm getAlgo(String encryptType) {
         IEncryptionAlgorithm encryptAlgo = new ShiftUpEncryption();
         switch (encryptType) {
-            case "shiftUp":
+            case "ShiftUp":
                 break;
-            case "shiftMultiply":
+            case "ShiftMultiply":
                 encryptAlgo = new ShiftMultiplyEncryption();
                 break;
-            case "double":
+            case "Double":
                 encryptAlgo = new DoubleEncryption(new ShiftUpEncryption());
                 break;
-            case "xor":
+            case "Xor":
                 encryptAlgo = new XorEncryption();
                 break;
-            case "repeat":
+            case "Repeat":
                 encryptAlgo = new RepeatEncryption(new ShiftUpEncryption(), 5);
                 break;
             default:
