@@ -20,39 +20,41 @@ public class UserAction {
         return action;
     }
 
-    public IEncryptionAlgorithm getAlgo() {
+    public IEncryptionAlgorithm getAlgo(String encryptType) {
         IEncryptionAlgorithm encryptAlgo = new ShiftUpEncryption();
-        boolean isAlgoDefined = false;
-        while (!isAlgoDefined) {
-            System.out.println("please enter shiftUp / shiftMultiply / double / xor / repeat");
-            String encryptType = reader.nextLine();
-            switch (encryptType) {
-                case "shiftUp":
-                    isAlgoDefined = true;
-                    break;
-                case "shiftMultiply":
-                    encryptAlgo = new ShiftMultiplyEncryption();
-                    isAlgoDefined = true;
-                    break;
-                case "double":
-                    encryptAlgo = new DoubleEncryption(new ShiftUpEncryption());
-                    isAlgoDefined = true;
-                    break;
-                case "xor":
-                    encryptAlgo = new XorEncryption();
-                    isAlgoDefined = true;
-                    break;
-                case "repeat":
-                    encryptAlgo = new RepeatEncryption(new ShiftUpEncryption(), 5);
-                    isAlgoDefined = true;
-                    break;
-                default:
-                    System.out.println("can't find your chosen algorithm. please try again");
-                    break;
-            }
+        switch (encryptType) {
+            case "shiftUp":
+                break;
+            case "shiftMultiply":
+                encryptAlgo = new ShiftMultiplyEncryption();
+                break;
+            case "double":
+                encryptAlgo = new DoubleEncryption(new ShiftUpEncryption());
+                break;
+            case "xor":
+                encryptAlgo = new XorEncryption();
+                break;
+            case "repeat":
+                encryptAlgo = new RepeatEncryption(new ShiftUpEncryption(), 5);
+                break;
+            default:
+                System.out.println("can't find your chosen algorithm. please try again");
+                break;
         }
         return encryptAlgo;
     }
+
+    public IEncryptionAlgorithm getAlgoByInput() {
+        System.out.println("please enter shiftUp / shiftMultiply / double / xor / repeat");
+        String algo = reader.nextLine();
+        while (!algo.equals("shiftUp") && !algo.equals("shiftMultiply") && !algo.equals("double") && !algo.equals("xor") && !algo.equals("repeat")) {
+            System.out.println("can't find your chosen action. please try again");
+            System.out.println("please enter shiftUp / shiftMultiply / double / xor / repeat");
+            algo = reader.nextLine();
+        }
+        return getAlgo(algo);
+    }
+
 
     public String getPath() {
         System.out.println("please enter path to your directory to encrypt");

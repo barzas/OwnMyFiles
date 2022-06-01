@@ -77,14 +77,14 @@ public class FileEncryptorMain {
 		UserAction userAction = new UserAction();
 		try {
 			if (userAction.getAction().equals("encrypt")) {// todo- take from front
-				IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(); // todo- take from front
+				IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from front
 				AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo);
 				EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 				asyncDirectoryProcessor.addObserver(asyncObserver);
 
 				asyncDirectoryProcessor.encryptDirectory(userAction.getPath());// todo- take from front
 			} else {
-				IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(); // todo- take from db
+				IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from db
 				AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo);
 				EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 				asyncDirectoryProcessor.addObserver(asyncObserver);
