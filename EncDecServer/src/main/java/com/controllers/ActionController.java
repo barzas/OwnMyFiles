@@ -14,7 +14,7 @@ import com.payload.request.EncryptRequest;
 import com.payload.response.MessageResponse;
 
 import com.repository.EncryptedFileRepository;
-import com.repository.UserRepository;
+import com.security.services.EncryptedFileDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,9 +33,13 @@ public class ActionController {
     @Autowired
     EncryptedFileRepository encryptedFileRepository;
 
+    @Autowired
+    private EncryptedFileDetailsServiceImpl encryptedFileService;
+
+    private UserAction userAction = new UserAction();
+
     @PostMapping("/encrypt")
     public ResponseEntity<?> encryptFile(@Valid @RequestBody EncryptRequest encryptRequest) {
-        UserAction userAction = new UserAction();
         EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
         int key = Key.generateKey();
 
@@ -56,7 +60,20 @@ public class ActionController {
 
     @PostMapping("/decrypt")
     public ResponseEntity<?> decryptFile(@Valid @RequestBody DecryptRequest decryptRequest) {
-        //TODO
+
+        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsername(decryptRequest.getUsername(), decryptRequest.getPath());
+
+        try {
+            IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(encryptedFile.getAlgorithm());
+            AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, encryptedFile.getKey());
+            EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
+            asyncDirectoryProcessor.addObserver(asyncObserver);
+
+            asyncDirectoryProcessor.decryptDirectory(encryptedFile.getPath());
+
+        } catch (InvalidEncryptionAlgorithmTypeException | IOException | InterruptedException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+        }
 
         return ResponseEntity.ok(new MessageResponse("Decrypt file Succesfull"));
     }
