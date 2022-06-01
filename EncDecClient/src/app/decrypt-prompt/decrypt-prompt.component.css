@@ -28,9 +28,20 @@ label {
   display: block;
 }
 
-.encytion{
+.encryption{
   margin: 0 auto 30px;
   padding: 5px 5px;
   width: 100px;
   background-color: azure;
 }
+
+.task-done-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+

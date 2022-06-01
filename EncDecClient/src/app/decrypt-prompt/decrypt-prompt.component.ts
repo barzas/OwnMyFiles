@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActionService} from '../_services/action.service';
 
 @Component({
   selector: 'app-decrypt-prompt',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./decrypt-prompt.component.css']
 })
 export class DecryptPromptComponent implements OnInit {
+  form: any = {};
+  errorMessage = '';
+  isDecrypted = false;
 
-  constructor() { }
+  constructor(private actionService: ActionService) {
+  }
 
   ngOnInit() {
+  }
+  onSubmit() {
+    this.actionService.decrypt(this.form).subscribe(
+      data => {
+        //TODO
+        this.isDecrypted = true;
+        this.succes();
+      },
+      error => {
+        this.errorMessage = error.error.message;
+      }
+    );
+  }
+
+  succes() {
+    window.location.reload();
   }
 
 }
