@@ -14,10 +14,6 @@ option {
   color: #002831;
 }
 
-/**
- * Extracted from: SweetAlert
- * Modified by: Istiak Tridip
- */
 .success-checkmark {
   width: 80px;
   height: 115px;
@@ -33,7 +29,7 @@ option {
   border: 4px solid #4CAF50;
 }
 
-.success-checkmark.check-icon::before {
+.check-icon::before {
    top: 3px;
    left: -2px;
    width: 30px;
@@ -41,7 +37,7 @@ option {
    border-radius: 100px 0 0 100px;
  }
 
-.success-checkmark.check-icon::after {
+.check-icon::after {
    top: 0;
    left: 30px;
    width: 60px;
@@ -50,13 +46,21 @@ option {
    animation: rotate-circle 4.25s ease-in;
  }
 
-.success-checkmark.check-icon::before,::after {
+.check-icon::before{
               content: '';
               height: 100px;
               position: absolute;
-              background: #FFFFFF;
+              background: none;
               transform: rotate(-45deg);
             }
+
+.check-icon::after{
+  content: '';
+  height: 100px;
+  position: absolute;
+  background: none;
+  transform: rotate(-45deg);
+}
 
 .icon-line {
   height: 5px;
@@ -67,7 +71,7 @@ option {
   z-index: 10;
 }
 
-.success-checkmark.check-icon.icon-line.line-tip {
+.line-tip {
    top: 46px;
    left: 14px;
    width: 25px;
@@ -75,7 +79,7 @@ option {
    animation: icon-line-tip 0.75s;
  }
 
-.success-checkmark.check-icon.icon-line.line-long {
+.line-long {
    top: 38px;
    right: 8px;
    width: 47px;
@@ -83,7 +87,7 @@ option {
    animation: icon-line-long 0.75s;
  }
 
-.success-checkmark.check-icon.icon-circle {
+.icon-circle {
   top: -4px;
   left: -4px;
   z-index: 10;
@@ -95,7 +99,7 @@ option {
   border: 4px solid rgba(76, 175, 80, .5);
 }
 
-.success-checkmark.check-icon.icon-fix {
+.icon-fix {
   top: 8px;
   width: 5px;
   left: 26px;
@@ -103,7 +107,7 @@ option {
   height: 85px;
   position: absolute;
   transform: rotate(-45deg);
-  background-color: #FFFFFF;
+  background-color: none;
 }
 
 @keyframes rotate-circle {

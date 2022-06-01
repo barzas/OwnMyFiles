@@ -11,7 +11,7 @@ export class EncyptPromptComponent implements OnInit {
   form: any = {};
   errorMessage = '';
   isEncrypted = false;
-  isSuccess = false;
+  isSuccess = true;
   options = ['ShiftUp', 'Xor', 'ShiftMultiply', 'Double', 'Repeat'];
   ngSelect = 'ShiftUp';
   constructor(private actionService: ActionService) {
@@ -35,10 +35,10 @@ export class EncyptPromptComponent implements OnInit {
   succes() {
     //wait 3 Seconds and hide
     setTimeout(function() {
-      this.isSuccess = true;
-      console.log(this.isSuccess);
-    }.bind(this), 3000);
-    // window.location.reload();
+      window.location.reload();
+      this.isEncrypted = false;
+    }.bind(this), 2000);
+
   }
 
 }
