@@ -1,0 +1,15 @@
+.encryption {
+  border-radius: 5px;
+  height: 10%;
+  background-color: whitesmoke;
+  color: #002831;
+}
+
+option {
+  color: #002831;
+}
+
+.text-input {
+  background-color: whitesmoke;
+  color: #002831;
+}

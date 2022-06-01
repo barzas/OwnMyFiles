@@ -26,12 +26,24 @@
         </div>
       </div>
       <label for="type">Choose an encryption option:</label>
-      <select class="encryption" id="type" name="type" [(ngModel)]="form.type" required #type="ngModel">
-        <option type="text" value="ShiftUp">ShiftUp</option>
-        <option type="text" value="Xor">Xor</option>
-        <option type="text" value="ShiftMultiply">ShiftMultiply</option>
-        <option type="text" value="Double">Double</option>
-        <option type="text" value="Repeat">Repeat</option>
+      <select class="encryption"
+              id="type"
+              name="type"
+              [(ngModel)]="form.type"
+              required
+              #type="ngModel"
+      >
+        <option *ngFor="let opt of options"
+                [selected]="opt === ngSelect"
+                [value]="opt"
+        >
+          {{ opt }}
+        </option>
+<!--        <option type="text" value="ShiftUp">ShiftUp</option>-->
+<!--        <option type="text" value="Xor">Xor</option>-->
+<!--        <option type="text" value="ShiftMultiply">ShiftMultiply</option>-->
+<!--        <option type="text" value="Double">Double</option>-->
+<!--        <option type="text" value="Repeat">Repeat</option>-->
       </select>
       <div
         class="alert alert-danger"

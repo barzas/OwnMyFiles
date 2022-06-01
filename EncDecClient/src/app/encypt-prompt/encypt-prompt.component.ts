@@ -11,7 +11,8 @@ export class EncyptPromptComponent implements OnInit {
   form: any = {};
   errorMessage = '';
   isEncrypted = false;
-
+  options = ['ShiftUp', 'Xor', 'ShiftMultiply', 'Double', 'Repeat'];
+  ngSelect = 'ShiftUp';
   constructor(private actionService: ActionService) {
   }
 
