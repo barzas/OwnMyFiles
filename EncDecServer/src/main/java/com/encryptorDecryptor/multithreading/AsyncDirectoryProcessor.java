@@ -21,11 +21,14 @@ import java.util.concurrent.Executors;
 public class AsyncDirectoryProcessor extends DirectoryProcessor{
 	private IEncryptionAlgorithm encAlgo;
 	private FileEncryptor fileEnc;
+
+	private int key;
 	private List<FileThread> threads;
 	
-	public AsyncDirectoryProcessor(IEncryptionAlgorithm encAlgo) {
+	public AsyncDirectoryProcessor(IEncryptionAlgorithm encAlgo, int key) {
 		this.encAlgo = encAlgo;
-		this.fileEnc = new FileEncryptor(encAlgo);
+		this.key = key;
+		this.fileEnc = new FileEncryptor(encAlgo, key);
 		this.threads = new ArrayList<>();
 	}
 	
@@ -47,7 +50,7 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 		File dir = new File(dirPath);
 		File subDir = new File(dir.getAbsoluteFile() + "\\encrypted");
 		checkFileErrors(subDir, dir, this.getClass());
-		Key key = new Key(dir.getAbsolutePath() + "\\key.txt");
+		Key key = new Key(dir.getAbsolutePath() + "\\key.txt", this.key);
 		File keyPath = new File(key.getPath());
 		if(keyPath.exists()) keyPath.delete();
 		KeyFileActions.writeKeyFile(key);

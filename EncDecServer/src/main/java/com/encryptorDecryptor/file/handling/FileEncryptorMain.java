@@ -3,6 +3,7 @@ package com.encryptorDecryptor.file.handling;
 import com.encryptorDecryptor.algorithm.handling.*;
 import com.encryptorDecryptor.encryption.logs.EncryptionEventObserver;
 import com.encryptorDecryptor.exceptions.InvalidEncryptionAlgorithmTypeException;
+import com.encryptorDecryptor.key.Key;
 import com.encryptorDecryptor.multithreading.AsyncDirectoryProcessor;
 
 import java.io.IOException;
@@ -75,18 +76,18 @@ public class FileEncryptorMain {
 //			}
 
 		UserAction userAction = new UserAction();
-		try {
-			if (userAction.getAction().equals("encrypt")) {// todo- take from front
-				IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from front
-				AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo);
-				EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
-				asyncDirectoryProcessor.addObserver(asyncObserver);
+				try {
+					if (userAction.getAction().equals("encrypt")) {// todo- take from front
+						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from front
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
+						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
+						asyncDirectoryProcessor.addObserver(asyncObserver);
 
-				asyncDirectoryProcessor.encryptDirectory(userAction.getPath());// todo- take from front
-			} else {
-				IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from db
-				AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo);
-				EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
+						asyncDirectoryProcessor.encryptDirectory(userAction.getPath());// todo- take from front
+					} else {
+						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from db
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
+						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 				asyncDirectoryProcessor.addObserver(asyncObserver);
 
 				asyncDirectoryProcessor.decryptDirectory(userAction.getPath());// todo- take from db

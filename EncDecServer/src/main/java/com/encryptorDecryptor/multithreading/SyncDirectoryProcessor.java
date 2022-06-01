@@ -20,7 +20,7 @@ public class SyncDirectoryProcessor extends DirectoryProcessor{
 	
 	public SyncDirectoryProcessor(IEncryptionAlgorithm encAlgo) {
 		this.encAlgo = encAlgo;
-		this.fileEnc = new FileEncryptor(encAlgo);
+		//this.fileEnc = new FileEncryptor(encAlgo); //todo - was deleted for not sending key
 	}
 	
 	public SyncDirectoryProcessor(FileEncryptor fileEnc) {

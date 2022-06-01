@@ -6,6 +6,7 @@ import com.encryptorDecryptor.enums.EncryptionEventEnum;
 import com.encryptorDecryptor.enums.OperationEnum;
 import com.encryptorDecryptor.exceptions.InvalidEncryptionAlgorithmTypeException;
 import com.encryptorDecryptor.key.Key;
+import com.models.EncryptedFile;
 
 import java.io.*;
 import java.nio.file.InvalidPathException;
@@ -14,10 +15,13 @@ import java.util.Observable;
 
 public class FileEncryptor extends Observable{
 	IEncryptionAlgorithm encAlgo;
+
+	int key;
 	private boolean keyFileFlag;
 	
-	public FileEncryptor(IEncryptionAlgorithm encAlgo) {
+	public FileEncryptor(IEncryptionAlgorithm encAlgo, int key) {
 		this.encAlgo = encAlgo;
+		this.key = key;
 		this.keyFileFlag = false;
 	}
 	
@@ -60,15 +64,15 @@ public class FileEncryptor extends Observable{
 		Paths.get(origFilePath);
         Paths.get(encFilePath);
 		Paths.get(keyPath);
-		Key key;
-		if(!keyFileFlag) {
-			key = new Key(keyPath);
-			KeyFileActions.writeKeyFile(key);
-			keyFileFlag = true;
-		}
-		else {
-			key = new Key(keyPath, KeyFileActions.readKeyFile(keyPath).get(0));
-		}
+//		if(!keyFileFlag) {
+//			key = new Key(keyPath);
+//			KeyFileActions.writeKeyFile(key);
+//			keyFileFlag = true;
+//		}
+//		else {
+//			key = new Key(keyPath, KeyFileActions.readKeyFile(keyPath).get(0));
+//		}
+		Key key = new Key(keyPath, this.key);
 		File encFile = new File(encFilePath); 
 		File origFile = new File(origFilePath);
 		encFile.createNewFile();	

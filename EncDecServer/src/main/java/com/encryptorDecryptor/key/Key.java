@@ -41,7 +41,7 @@ public class Key {
 	/**
 	 * @return
 	 */
-	private static int generateKey() {
+	public static int generateKey() {
 		ArrayList<Integer> arr = getPrimes();
 		Random rand = new Random();
 		int randNum = rand.nextInt(arr.size());

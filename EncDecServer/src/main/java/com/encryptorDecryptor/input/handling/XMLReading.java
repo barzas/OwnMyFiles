@@ -4,6 +4,7 @@ import com.encryptorDecryptor.encryption.logs.EncryptionEventObserver;
 import com.encryptorDecryptor.encryption.logs.EncryptionLog4JLogger;
 import com.encryptorDecryptor.exceptions.InvalidEncryptionAlgorithmTypeException;
 import com.encryptorDecryptor.file.handling.FileEncryptor;
+import com.encryptorDecryptor.key.Key;
 import com.encryptorDecryptor.multithreading.AsyncDirectoryProcessor;
 
 import javax.xml.bind.JAXBContext;
@@ -22,7 +23,7 @@ public class XMLReading {
 		if(!filePath.substring(filePath.lastIndexOf('.'), filePath.length()).equals(".xml"))
 			EncryptionLog4JLogger.error("wrong file type given", this.getClass());
 		ProcessSettings reader = readFile(file);
-		this.fileEnc = new FileEncryptor(reader.getEncAlgo());
+		this.fileEnc = new FileEncryptor(reader.getEncAlgo(), Key.generateKey()); //todo- not correct key
 		this.xmlFile = file;
 	}
 	

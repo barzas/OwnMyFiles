@@ -1,6 +1,7 @@
 package com.encryptorDecryptor.file.handling;
 
 import com.encryptorDecryptor.algorithm.handling.*;
+import com.encryptorDecryptor.exceptions.InvalidEncryptionAlgorithmTypeException;
 
 import java.io.File;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class UserAction {
         return action;
     }
 
-    public IEncryptionAlgorithm getAlgo(String encryptType) {
+    public IEncryptionAlgorithm getAlgo(String encryptType) throws InvalidEncryptionAlgorithmTypeException {
         IEncryptionAlgorithm encryptAlgo = new ShiftUpEncryption();
         switch (encryptType) {
             case "ShiftUp":
@@ -38,16 +39,15 @@ public class UserAction {
                 encryptAlgo = new RepeatEncryption(new ShiftUpEncryption(), 5);
                 break;
             default:
-                System.out.println("can't find your chosen algorithm. please try again");
-                break;
+                throw new InvalidEncryptionAlgorithmTypeException("can't find your chosen algorithm type. please try again");
         }
         return encryptAlgo;
     }
 
-    public IEncryptionAlgorithm getAlgoByInput() {
-        System.out.println("please enter shiftUp / shiftMultiply / double / xor / repeat");
+    public IEncryptionAlgorithm getAlgoByInput() throws InvalidEncryptionAlgorithmTypeException {
+        System.out.println("please enter ShiftUp / ShiftMultiply / Double / Xor / Repeat");
         String algo = reader.nextLine();
-        while (!algo.equals("shiftUp") && !algo.equals("shiftMultiply") && !algo.equals("double") && !algo.equals("xor") && !algo.equals("repeat")) {
+        while (!algo.equals("ShiftUp") && !algo.equals("ShiftMultiply") && !algo.equals("Double") && !algo.equals("Xor") && !algo.equals("Repeat")) {
             System.out.println("can't find your chosen action. please try again");
             System.out.println("please enter shiftUp / shiftMultiply / double / xor / repeat");
             algo = reader.nextLine();

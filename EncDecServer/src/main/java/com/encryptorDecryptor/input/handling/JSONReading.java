@@ -1,5 +1,6 @@
 package com.encryptorDecryptor.input.handling;
 
+import com.encryptorDecryptor.key.Key;
 import com.google.gson.Gson;
 import com.encryptorDecryptor.encryption.logs.EncryptionEventObserver;
 import com.encryptorDecryptor.encryption.logs.EncryptionLog4JLogger;
@@ -24,7 +25,7 @@ public class JSONReading {
 			EncryptionLog4JLogger.error("wrong file type given", this.getClass());
 		
 		ProcessSettings encryptionInfo = readFile(file);
-		this.fileEnc = new FileEncryptor(encryptionInfo.getEncAlgo());
+		this.fileEnc = new FileEncryptor(encryptionInfo.getEncAlgo(), Key.generateKey()); // todo-not correct key
 		this.jsonFile = file;
 	}
 	
