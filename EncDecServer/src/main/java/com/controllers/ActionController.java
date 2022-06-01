@@ -35,20 +35,21 @@ public class ActionController {
 
     @PostMapping("/encrypt")
     public ResponseEntity<?> encryptFile(@Valid @RequestBody EncryptRequest encryptRequest) {
-        //TODO
         UserAction userAction = new UserAction();
         EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
         int key = Key.generateKey();
+
         try {
             IEncryptionAlgorithm encryptionAlgorithm = userAction.getAlgo(encryptRequest.getEnctype());
             AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptionAlgorithm, key);
             asyncDirectoryProcessor.addObserver(asyncObserver);
             asyncDirectoryProcessor.encryptDirectory(encryptRequest.getPath());
+
         } catch (InvalidEncryptionAlgorithmTypeException | IOException | InterruptedException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
 
-        EncryptedFile encryptedFile= new EncryptedFile(encryptRequest.getUsername(), encryptRequest.getEnctype(), encryptRequest.getPath(), String.valueOf(key));
+        EncryptedFile encryptedFile= new EncryptedFile(encryptRequest.getUsername(), encryptRequest.getEnctype(), encryptRequest.getPath(), key);
         encryptedFileRepository.save(encryptedFile);
         return ResponseEntity.ok(new MessageResponse("Encrypt file Succesfull"));
     }

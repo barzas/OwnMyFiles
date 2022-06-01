@@ -13,9 +13,9 @@ public class EncryptedFileImpl {
 
     private String path;
 
-    private String key;
+    private int key;
 
-    public EncryptedFileImpl(String id, String username, String algorithm, String path, String key) {
+    public EncryptedFileImpl(String id, String username, String algorithm, String path, int key) {
         this.id = id;
         this.username = username;
         this.algorithm = algorithm;
@@ -48,7 +48,7 @@ public class EncryptedFileImpl {
         return path;
     }
 
-    public String getKey() {
+    public int getKey() {
         return key;
     }
 }

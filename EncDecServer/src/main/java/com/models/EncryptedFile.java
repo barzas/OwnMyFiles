@@ -25,9 +25,9 @@ public class EncryptedFile {
     private String path;
 
     @NotBlank
-    private String key;
+    private int key;
 
-    public EncryptedFile(String username, String algorithm, String path, String key) {
+    public EncryptedFile(String username, String algorithm, String path, int key) {
         this.username = username;
         this.algorithm = algorithm;
         this.path = path;
@@ -66,11 +66,11 @@ public class EncryptedFile {
         this.path = path;
     }
 
-    public String getKey() {
+    public int getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(int key) {
         this.key = key;
     }
 }
