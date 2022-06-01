@@ -61,7 +61,7 @@ public class SyncDirectoryProcessor extends DirectoryProcessor{
 		checkFileErrors(subDir, dir, this.getClass());
 		File encryptedFolder = new File(dirPath + "\\encrypted");
 		String keyPath = dir.getAbsolutePath() + "\\key.txt";
-		encryptionFilesValidation(encryptedFolder, keyPath);
+		encryptionFilesValidation(encryptedFolder);
 		for(File file : encryptedFolder.listFiles()) {
 			handleEachFile(file, subDir, keyPath, OperationEnum.DECRYPT);
 		}
@@ -77,11 +77,11 @@ public class SyncDirectoryProcessor extends DirectoryProcessor{
 				&& !fileName.equals("key.txt")) {
 				switch(operation) {
 				case ENCRYPT:
-					fileEnc.handleEncryption(file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()), keyPath);
+					fileEnc.handleEncryption(file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()));
 					break;
 				
 				case DECRYPT:
-					fileEnc.handleDecryption(file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()), keyPath);
+					fileEnc.handleDecryption(file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()));
 					break;
 				}
 			}

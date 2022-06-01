@@ -53,11 +53,11 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 		Key key = new Key(dir.getAbsolutePath() + "\\key.txt", this.key);
 		File keyPath = new File(key.getPath());
 		if(keyPath.exists()) keyPath.delete();
-		KeyFileActions.writeKeyFile(key);
+		//KeyFileActions.writeKeyFile(key);
 		fileEnc.setKeyFileFlag(true);
 		
 		for(File file : dir.listFiles()) {
-			handleEachFile(file, subDir, key.getPath(), OperationEnum.ENCRYPT);
+			handleEachFile(file, subDir, OperationEnum.ENCRYPT);
 		}
 		ExecutorService threadPool = Executors.newCachedThreadPool();
 		threadPool.invokeAll(threads); 	
@@ -77,10 +77,10 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 		File subDir = new File(dir.getAbsoluteFile() + "\\decrypted");
 		checkFileErrors(subDir, dir, this.getClass());
 		File encryptedFolder = new File(dirPath + "\\encrypted");
-		String keyPath = dir.getAbsolutePath() + "\\key.txt";
-		encryptionFilesValidation(encryptedFolder, keyPath);
+//		String keyPath = dir.getAbsolutePath() + "\\key.txt";
+		encryptionFilesValidation(encryptedFolder);
 		for(File file : encryptedFolder.listFiles()) {
-			handleEachFile(file, subDir, keyPath, OperationEnum.DECRYPT);
+			handleEachFile(file, subDir, OperationEnum.DECRYPT);
 		}
 		ExecutorService threadPool = Executors.newCachedThreadPool();
 		threadPool.invokeAll(threads);
@@ -90,12 +90,12 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 		fileEnc.notifyEvent(EncryptionEventEnum.DIRECTORY_DECRYPTION_ENDED, dirPath, encAlgo, end - start, this.getClass());	
 	}
 	
-	private void handleEachFile(File file, File subDir, String keyPath, OperationEnum operation)  {
+	private void handleEachFile(File file, File subDir, OperationEnum operation)  {
 		String fileName = file.getName();
 		if(!file.isDirectory() && fileName.lastIndexOf('.') != -1) {
 			if(fileName.substring(fileName.lastIndexOf('.'), fileName.length()).equals(".txt")
 				&& !fileName.equals("key.txt")) {
-				FileThread thread = new FileThread(this.fileEnc, file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()), keyPath, operation);
+				FileThread thread = new FileThread(this.fileEnc, file.getPath(), (subDir.getAbsolutePath() + "\\" + file.getName()), operation, this.key);
 				threads.add(thread);
 			}
 		}
