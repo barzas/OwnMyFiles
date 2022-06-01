@@ -14,9 +14,9 @@ public abstract class DirectoryProcessor implements IDirectoryProcessor{
 		else if(!dir.isDirectory()) EncryptionLog4JLogger.error("path given to a file that isn't a directory", origClass);
 	}
 	
-	protected void encryptionFilesValidation(File encryptedFolder, String keyPath) throws IOException { //todo- throw to front
+	protected void encryptionFilesValidation(File encryptedFolder) throws IOException { //todo- throw to front
 		if(encryptedFolder.createNewFile()) EncryptionLog4JLogger.error("encrypted file doesn't exist", this.getClass());
 		else if(!encryptedFolder.isDirectory()) EncryptionLog4JLogger.error("encrypted file isn't a folder", this.getClass());
-		if(!new File(keyPath).exists()) EncryptionLog4JLogger.fatal("key file to decrypt with not found", this.getClass());
+		//if(!new File(keyPath).exists()) EncryptionLog4JLogger.fatal("key file to decrypt with not found", this.getClass());
 	}
 }

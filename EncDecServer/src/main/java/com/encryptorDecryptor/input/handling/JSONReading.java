@@ -34,7 +34,7 @@ public class JSONReading {
 		if(encryptionInfo.getOrigPath().equals("")) 
 			EncryptionLog4JLogger.error("no source file path given", this.getClass());
 		if(!encryptionInfo.getEncryptPath().equals("") && !encryptionInfo.getDecryptPath().equals("") && !encryptionInfo.getKeyPath().equals("")) {
-			fileEnc.handleEncryption(encryptionInfo.getOrigPath(), encryptionInfo.getEncryptPath(), encryptionInfo.getKeyPath());
+			fileEnc.handleEncryption(encryptionInfo.getOrigPath(), encryptionInfo.getEncryptPath());
 		}
 		else {
 			AsyncDirectoryProcessor encryptDir = new AsyncDirectoryProcessor(this.fileEnc);
@@ -47,7 +47,7 @@ public class JSONReading {
 		if(encryptionInfo.getOrigPath().equals("")) 
 			EncryptionLog4JLogger.error("no source file path given", this.getClass());
 		if(!encryptionInfo.getEncryptPath().equals("") && !encryptionInfo.getDecryptPath().equals("") && !encryptionInfo.getKeyPath().equals("")) {
-			fileEnc.handleDecryption(encryptionInfo.getEncryptPath(), encryptionInfo.getDecryptPath(), encryptionInfo.getKeyPath());
+			fileEnc.handleDecryption(encryptionInfo.getEncryptPath(), encryptionInfo.getDecryptPath());
 		}
 		else {
 			AsyncDirectoryProcessor decryptDir = new AsyncDirectoryProcessor(this.fileEnc);

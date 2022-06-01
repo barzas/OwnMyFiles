@@ -53,17 +53,16 @@ public class FileEncryptor extends Observable{
 	/**
 	 * @param origFilePath
 	 * @param encFilePath
-	 * @param keyPath
 	 * @throws IOException
 	 * @throws InvalidPathException
 	 * @throws InvalidEncryptionAlgorithmTypeException
 	 */
-	public void handleEncryption(String origFilePath, String encFilePath, String keyPath) throws IOException, InvalidPathException, InvalidEncryptionAlgorithmTypeException {
+	public void handleEncryption(String origFilePath, String encFilePath) throws IOException, InvalidPathException, InvalidEncryptionAlgorithmTypeException {
 		double start = System.currentTimeMillis();
 		notifyEvent(EncryptionEventEnum.ENCRYPTION_STARTED, origFilePath, encAlgo, encFilePath, start, this.getClass());
 		Paths.get(origFilePath);
         Paths.get(encFilePath);
-		Paths.get(keyPath);
+//		Paths.get(keyPath);
 //		if(!keyFileFlag) {
 //			key = new Key(keyPath);
 //			KeyFileActions.writeKeyFile(key);
@@ -72,7 +71,7 @@ public class FileEncryptor extends Observable{
 //		else {
 //			key = new Key(keyPath, KeyFileActions.readKeyFile(keyPath).get(0));
 //		}
-		Key key = new Key(keyPath, this.key);
+		Key key = new Key(this.key);
 		File encFile = new File(encFilePath); 
 		File origFile = new File(origFilePath);
 		encFile.createNewFile();	
@@ -86,17 +85,16 @@ public class FileEncryptor extends Observable{
 	/**
 	 * @param encFilePath
 	 * @param decFilePath
-	 * @param keyPath
 	 * @throws IOException
 	 * @throws InvalidPathException
 	 */
-	public void handleDecryption(String encFilePath, String decFilePath, String keyPath) throws IOException, InvalidPathException, SecurityException {
+	public void handleDecryption(String encFilePath, String decFilePath) throws IOException, InvalidPathException, SecurityException {
 		double start = System.currentTimeMillis();
 		notifyEvent(EncryptionEventEnum.DECRYPTION_STARTED, encFilePath, encAlgo, decFilePath, start, this.getClass());
 		Paths.get(decFilePath);
         Paths.get(encFilePath);
-        Paths.get(keyPath);
-        Key key = new Key(keyPath, KeyFileActions.readKeyFile(keyPath).get(0));
+ //       Paths.get(keyPath);
+        Key key = new Key(this.key);
 		File decFile = new File(decFilePath);
 		File encFile = new File(encFilePath);
 		decFile.createNewFile();
