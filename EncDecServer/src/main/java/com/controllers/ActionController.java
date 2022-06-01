@@ -61,7 +61,7 @@ public class ActionController {
     @PostMapping("/decrypt")
     public ResponseEntity<?> decryptFile(@Valid @RequestBody DecryptRequest decryptRequest) {
 
-        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsername(decryptRequest.getUsername(), decryptRequest.getPath());
+        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsername(decryptRequest.getUsername());
 
         try {
             IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(encryptedFile.getAlgorithm());

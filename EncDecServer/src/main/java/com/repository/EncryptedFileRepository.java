@@ -10,5 +10,6 @@ public interface EncryptedFileRepository extends MongoRepository<EncryptedFile, 
 
     Optional<EncryptedFile> findByUsernameAndPath(String username, String path);
 
+    Optional<EncryptedFile> findByUsername(String username);
     Boolean existsByUsernameAndPath(String username, String path);
 }

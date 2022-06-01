@@ -13,8 +13,8 @@ public class EncryptedFileDetailsServiceImpl {
     EncryptedFileRepository encryptedFileRepository;
 
     @Transactional
-    public EncryptedFile loadUserByUsername(String username, String path) throws UsernameNotFoundException {
-        EncryptedFile encryptedFile = encryptedFileRepository.findByUsernameAndPath(username, path)
+    public EncryptedFile loadUserByUsername(String username) throws UsernameNotFoundException {
+        EncryptedFile encryptedFile = encryptedFileRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
         return encryptedFile;
