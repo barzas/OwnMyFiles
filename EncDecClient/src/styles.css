@@ -107,5 +107,6 @@ button{
 
 .alert-danger {
   background-color: rgba(193,13,12,0.81);
+  color: #FFFFFF;
   opacity: 70%;
 }
