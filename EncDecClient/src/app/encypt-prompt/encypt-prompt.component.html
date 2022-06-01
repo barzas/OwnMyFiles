@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form
+    <form *ngIf="!isEncrypted"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
@@ -58,14 +58,12 @@
         </button>
       </div>
     </form>
-  <div class="card card-container" *ngIf="isEncrypted">
-    <img
-      id="done-img"
-      src="../assets/V.png"
-      class="task-done-img"
-    />
-    <div class="alert alert-success">
-      Encrypted Success!!
+  <div class="success-checkmark"  *ngIf="isEncrypted">
+    <div class="check-icon" [hidden]="isSuccess">
+      <span class="icon-line line-tip"></span>
+      <span class="icon-line line-long"></span>
+      <div class="icon-circle"></div>
+      <div class="icon-fix"></div>
     </div>
   </div>
 </div>
