@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form
+  <form
       *ngIf="!isLoggedIn"
       name="form"
       class="form"
@@ -63,9 +63,19 @@
         </div>
       </div>
       </form>
-
-    <div class="alert alert-success" *ngIf="isLoggedIn">
+  <div class="card-container" *ngIf="isLoggedIn">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div class="alert alert-success">
       Logged in as {{ roles }}.
     </div>
+  </div>
+
 </div>
 

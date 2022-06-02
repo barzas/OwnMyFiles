@@ -30,7 +30,10 @@ export class DecryptPromptComponent implements OnInit {
   }
 
   succes() {
-    window.location.reload();
+    setTimeout(function() {
+      window.location.reload();
+      this.isDecrypted = false;
+    }.bind(this), 2000);
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form
+    <form *ngIf="!isDecrypted"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
@@ -31,11 +31,18 @@
         </button>
       </div>
     </form>
-  <img
-    *ngIf="isDecrypted"
-    id="done-img"
-    src="../assets/V.png"
-    class="task-done-img"
-  />
+  <div class="card-container" *ngIf="isDecrypted">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div class="alert alert-success">
+      Decrypted Success !
+    </div>
+  </div>
 </div>
 
