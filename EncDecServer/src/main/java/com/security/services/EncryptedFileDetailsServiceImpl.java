@@ -21,11 +21,13 @@ public class EncryptedFileDetailsServiceImpl {
     }
 
     // how its in the example:
-//    @Transactional
-//    public EncryptedFileImpl loadUserByUsername(String username, String path) throws UsernameNotFoundException {
-//        EncryptedFile encryptedFile = encryptedFileRepository.findByUsernameAndPath(username, path)
-//                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-//
-//        return EncryptedFileImpl.build(encryptedFile);
-//    }
+    @Transactional
+    public EncryptedFile loadUserByUsernameAndPath(String username, String path) throws UsernameNotFoundException {
+        EncryptedFile encryptedFile = encryptedFileRepository.findByUsernameAndPath(username, path)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+        return encryptedFile;
+    }
+
+    //todo- add fanctions of timestemp and delete
 }

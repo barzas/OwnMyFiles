@@ -12,8 +12,7 @@ public class KeyFileActions {
 	 * @throws IOException
 	 * @throws InvalidPathException
 	 */
-	public static void writeKeyFile(Key key) throws IOException, InvalidPathException { //write a random key to the key file
-		Paths.get(key.getPath());
+	public static void writeKeyFile(Key key) throws IOException, InvalidPathException { //write a random key to the key filePaths.get(key.getPath());
 		File keyFile = new File(key.getPath());
 		FileWriter keyWriter = new FileWriter(keyFile, true);
 		keyWriter.write(String.valueOf(key.getKey()) + System.lineSeparator());
