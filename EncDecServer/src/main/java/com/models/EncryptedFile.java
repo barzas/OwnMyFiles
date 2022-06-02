@@ -27,11 +27,15 @@ public class EncryptedFile {
     @NotBlank
     private int key;
 
-    public EncryptedFile(String username, String algorithm, String path, int key) {
+    @NotBlank
+    private int secondKey;
+
+    public EncryptedFile(String username, String algorithm, String path, int key, int secondKey) {
         this.username = username;
         this.algorithm = algorithm;
         this.path = path;
         this.key = key;
+        this.secondKey = secondKey;
     }
 
     public String getId() {
@@ -72,5 +76,13 @@ public class EncryptedFile {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public int getSecondKey() {
+        return secondKey;
+    }
+
+    public void setSecondKey(int secondKey) {
+        this.secondKey = secondKey;
     }
 }

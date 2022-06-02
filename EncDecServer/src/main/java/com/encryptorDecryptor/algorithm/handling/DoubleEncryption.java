@@ -22,24 +22,15 @@ public class DoubleEncryption extends ComplexEncryptions{
 	
 	@Override
 	public String convertStringEnc(String origString, Key key) throws InvalidPathException, IOException {
-		Key secondKey;
-		if(!secondKeyFlag) {
-			secondKey = new Key(key.getPath());
-	//		KeyFileActions.writeKeyFile(secondKey);
-			secondKeyFlag = true;
-			secondKeyVal = secondKey.getKey();
-		}
-		else {
-			secondKey = new Key(key.getPath(), this.secondKeyVal);
-		}
 		String firstConversion = enc.convertStringEnc(origString, key);
+		Key secondKey = new Key(key.getSecondKey());
 		String secondConversion = enc.convertStringEnc(firstConversion, secondKey);
 		return secondConversion;
 	}
 
 	@Override
 	public String convertStringDec(String origString, Key key) throws InvalidPathException, IOException {
-		Key secondKey = new Key(secondKeyVal);
+		Key secondKey = new Key(key.getSecondKey());
 		String firstConversion = enc.convertStringDec(origString, secondKey);
 		String secondConversion = enc.convertStringDec(firstConversion, key);
 		return secondConversion;

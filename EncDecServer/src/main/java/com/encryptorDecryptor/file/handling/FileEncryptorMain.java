@@ -24,14 +24,19 @@ public class FileEncryptorMain {
 				try {
 					if (userAction.getAction().equals("encrypt")) {
 						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput();
-						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
+
+						Key key = encryptAlgo.getClass().equals(DoubleEncryption.class) ?
+								new Key(Key.generateKey(), Key.generateKey()) :
+								new Key(Key.generateKey());
+
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, key);
 						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 						asyncDirectoryProcessor.addObserver(asyncObserver);
 
 						asyncDirectoryProcessor.encryptDirectory(userAction.getPath());
 					} else {
 						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput();
-						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, 73);
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, new Key(193, 173));//change the key while testing
 						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 				asyncDirectoryProcessor.addObserver(asyncObserver);
 

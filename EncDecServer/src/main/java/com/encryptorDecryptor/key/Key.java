@@ -8,6 +8,7 @@ import java.util.Random;
 public class Key {
 	private static int maxValue = (int)Math.sqrt(65536);
 	private int key;
+	private int secondKey;
 	private String path;
 	
 	public Key(String path, int key) {
@@ -23,6 +24,11 @@ public class Key {
 	public Key(int key) {
 		this.key = key;
 	}
+
+	public Key(int key, int secondKey) {
+		this.key = key;
+		this.secondKey = secondKey;
+	}
 	
 	public Key() {
 		this.path = null;
@@ -36,7 +42,10 @@ public class Key {
 	public String getPath() {
 		return path;
 	}
-	
+
+	public int getSecondKey() {
+		return secondKey;
+	}
 
 	/**
 	 * @return

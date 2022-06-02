@@ -41,7 +41,10 @@ public class ActionController {
     @PostMapping("/encrypt")
     public ResponseEntity<?> encryptFile(@Valid @RequestBody EncryptRequest encryptRequest) {
         EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
-        int key = Key.generateKey();
+
+        Key key = encryptRequest.getEnctype().equals("Double") ?
+                new Key(Key.generateKey(), Key.generateKey()) :
+                new Key(Key.generateKey());
 
         try {
             IEncryptionAlgorithm encryptionAlgorithm = userAction.getAlgo(encryptRequest.getEnctype());
@@ -53,7 +56,7 @@ public class ActionController {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
 
-        EncryptedFile encryptedFile= new EncryptedFile(encryptRequest.getUsername(), encryptRequest.getEnctype(), encryptRequest.getPath(), key);
+        EncryptedFile encryptedFile= new EncryptedFile(encryptRequest.getUsername(), encryptRequest.getEnctype(), encryptRequest.getPath(), key.getKey(), key.getSecondKey());
         encryptedFileRepository.save(encryptedFile);
         return ResponseEntity.ok(new MessageResponse("Encrypt file Successful"));
     }
@@ -65,7 +68,7 @@ public class ActionController {
         //todo- delete from db
         try {
             IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(encryptedFile.getAlgorithm());
-            AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, encryptedFile.getKey());
+            AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, new Key(encryptedFile.getKey(), encryptedFile.getSecondKey()));
             EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
             asyncDirectoryProcessor.addObserver(asyncObserver);
 

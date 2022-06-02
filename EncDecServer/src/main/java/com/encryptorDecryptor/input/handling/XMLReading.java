@@ -23,7 +23,7 @@ public class XMLReading {
 		if(!filePath.substring(filePath.lastIndexOf('.'), filePath.length()).equals(".xml"))
 			EncryptionLog4JLogger.error("wrong file type given", this.getClass());
 		ProcessSettings reader = readFile(file);
-		this.fileEnc = new FileEncryptor(reader.getEncAlgo(), Key.generateKey()); //todo- not correct key
+		this.fileEnc = new FileEncryptor(reader.getEncAlgo(), new Key(Key.generateKey())); //not correct key
 		this.xmlFile = file;
 	}
 	

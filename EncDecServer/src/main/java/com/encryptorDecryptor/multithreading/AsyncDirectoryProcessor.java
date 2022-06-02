@@ -21,10 +21,10 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 	private IEncryptionAlgorithm encAlgo;
 	private FileEncryptor fileEnc;
 
-	private int key;
+	private Key key;
 	private List<FileThread> threads;
 	
-	public AsyncDirectoryProcessor(IEncryptionAlgorithm encAlgo, int key) {
+	public AsyncDirectoryProcessor(IEncryptionAlgorithm encAlgo, Key key) {
 		this.encAlgo = encAlgo;
 		this.key = key;
 		this.fileEnc = new FileEncryptor(encAlgo, key);
@@ -49,7 +49,6 @@ public class AsyncDirectoryProcessor extends DirectoryProcessor{
 		File dir = new File(dirPath);
 		File subDir = new File(dir.getAbsoluteFile() + "\\encrypted");
 		checkFileErrors(subDir, dir, this.getClass());
-		Key key = new Key(this.key);
 //		File keyPath = new File(key.getPath());
 //		if(keyPath.exists()) keyPath.delete();
 		fileEnc.setKeyFileFlag(true);

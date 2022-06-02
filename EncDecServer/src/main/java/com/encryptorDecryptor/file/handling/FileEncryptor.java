@@ -16,10 +16,10 @@ import java.util.Observable;
 public class FileEncryptor extends Observable{
 	IEncryptionAlgorithm encAlgo;
 
-	int key;
+	Key key;
 	private boolean keyFileFlag;
 	
-	public FileEncryptor(IEncryptionAlgorithm encAlgo, int key) {
+	public FileEncryptor(IEncryptionAlgorithm encAlgo, Key key) {
 		this.encAlgo = encAlgo;
 		this.key = key;
 		this.keyFileFlag = false;
@@ -71,11 +71,10 @@ public class FileEncryptor extends Observable{
 //		else {
 //			key = new Key(keyPath, KeyFileActions.readKeyFile(keyPath).get(0));
 //		}
-		Key key = new Key(this.key);
-		File encFile = new File(encFilePath); 
+		File encFile = new File(encFilePath);
 		File origFile = new File(origFilePath);
 		encFile.createNewFile();	
-		writeToFileFromFile(origFile, encFile, key, OperationEnum.ENCRYPT);
+		writeToFileFromFile(origFile, encFile, this.key, OperationEnum.ENCRYPT);
 		double end = System.currentTimeMillis();
 		notifyEvent(EncryptionEventEnum.ENCRYPTION_ENDED, origFilePath, encAlgo, encFilePath, end - start, this.getClass());
 
@@ -94,11 +93,10 @@ public class FileEncryptor extends Observable{
 		Paths.get(decFilePath);
         Paths.get(encFilePath);
 //       Paths.get(keyPath);
-        Key key = new Key(this.key);
 		File decFile = new File(decFilePath);
 		File encFile = new File(encFilePath);
 		decFile.createNewFile();
-		writeToFileFromFile(encFile, decFile, key, OperationEnum.DECRYPT);
+		writeToFileFromFile(encFile, decFile, this.key, OperationEnum.DECRYPT);
 		double end = System.currentTimeMillis();
 		notifyEvent(EncryptionEventEnum.DECRYPTION_ENDED, encFilePath, encAlgo, decFilePath, end - start, this.getClass());
 	}

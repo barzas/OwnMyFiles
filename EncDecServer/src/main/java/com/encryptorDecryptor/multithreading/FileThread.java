@@ -3,6 +3,7 @@ package com.encryptorDecryptor.multithreading;
 
 import com.encryptorDecryptor.enums.OperationEnum;
 import com.encryptorDecryptor.file.handling.FileEncryptor;
+import com.encryptorDecryptor.key.Key;
 
 import java.util.concurrent.Callable;
 
@@ -12,9 +13,9 @@ public class FileThread implements Callable<Integer> {
 	private String subDirPath;
 	private OperationEnum operation;
 
-	private int key;
+	private Key key;
 	
-	public FileThread(FileEncryptor fileEnc, String filePath, String subDirPath, OperationEnum operation, int key) {
+	public FileThread(FileEncryptor fileEnc, String filePath, String subDirPath, OperationEnum operation, Key key) {
 		this.fileEnc = fileEnc;
 		this.filePath = filePath;
 		this.subDirPath = subDirPath;

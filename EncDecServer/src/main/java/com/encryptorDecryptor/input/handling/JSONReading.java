@@ -25,7 +25,7 @@ public class JSONReading {
 			EncryptionLog4JLogger.error("wrong file type given", this.getClass());
 		
 		ProcessSettings encryptionInfo = readFile(file);
-		this.fileEnc = new FileEncryptor(encryptionInfo.getEncAlgo(), Key.generateKey()); // todo-not correct key
+		this.fileEnc = new FileEncryptor(encryptionInfo.getEncAlgo(), new Key(Key.generateKey())); // not correct key
 		this.jsonFile = file;
 	}
 	
