@@ -42,10 +42,10 @@ public class SyncDirectoryProcessor extends DirectoryProcessor{
 		Key key = new Key(dir.getAbsolutePath() + "\\key.txt");
 		File keyPath = new File(key.getPath());
 		if(keyPath.exists()) keyPath.delete();
-		KeyFileActions.writeKeyFile(key);
+//		KeyFileActions.writeKeyFile(key);
 		fileEnc.setKeyFileFlag(false);
 		for(File file : dir.listFiles()) {
-			handleEachFile(file, subDir, key.getPath(), OperationEnum.ENCRYPT);
+			handleEachFile(file, subDir, OperationEnum.ENCRYPT);
 		}
 		double end = System.currentTimeMillis();
 		fileEnc.notifyEvent(EncryptionEventEnum.DIRECTORY_ENCRYPTION_ENDED, dirPath, encAlgo, end - start, this.getClass());
@@ -63,14 +63,12 @@ public class SyncDirectoryProcessor extends DirectoryProcessor{
 		String keyPath = dir.getAbsolutePath() + "\\key.txt";
 		encryptionFilesValidation(encryptedFolder);
 		for(File file : encryptedFolder.listFiles()) {
-			handleEachFile(file, subDir, keyPath, OperationEnum.DECRYPT);
+			handleEachFile(file, subDir, OperationEnum.DECRYPT);
 		}
 		double end = System.currentTimeMillis();
 		fileEnc.notifyEvent(EncryptionEventEnum.DIRECTORY_DECRYPTION_ENDED, dirPath, encAlgo, end - start, this.getClass());
 	}
-	
-	
-	private void handleEachFile(File file, File subDir, String keyPath, OperationEnum operation) throws InvalidPathException, IOException, InvalidEncryptionAlgorithmTypeException  {
+	private void handleEachFile(File file, File subDir, OperationEnum operation) throws InvalidPathException, IOException, InvalidEncryptionAlgorithmTypeException  {
 		String fileName = file.getName();
 		if(!file.isDirectory() && fileName.lastIndexOf('.') != -1) {
 			if(fileName.substring(fileName.lastIndexOf('.'), fileName.length()).equals(".txt")

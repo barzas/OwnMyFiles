@@ -25,7 +25,7 @@ public class DoubleEncryption extends ComplexEncryptions{
 		Key secondKey;
 		if(!secondKeyFlag) {
 			secondKey = new Key(key.getPath());
-			KeyFileActions.writeKeyFile(secondKey);
+	//		KeyFileActions.writeKeyFile(secondKey);
 			secondKeyFlag = true;
 			secondKeyVal = secondKey.getKey();
 		}

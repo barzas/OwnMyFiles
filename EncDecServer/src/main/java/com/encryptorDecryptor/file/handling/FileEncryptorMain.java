@@ -22,20 +22,20 @@ public class FileEncryptorMain {
 	public static void main(String[] args) throws InvalidPathException {
 		UserAction userAction = new UserAction();
 				try {
-					if (userAction.getAction().equals("encrypt")) {// todo- take from front
-						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from front
+					if (userAction.getAction().equals("encrypt")) {
+						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput();
 						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
 						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 						asyncDirectoryProcessor.addObserver(asyncObserver);
 
-						asyncDirectoryProcessor.encryptDirectory(userAction.getPath());// todo- take from front
+						asyncDirectoryProcessor.encryptDirectory(userAction.getPath());
 					} else {
-						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput(); // todo- take from db
-						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
+						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput();
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, 73);
 						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 				asyncDirectoryProcessor.addObserver(asyncObserver);
 
-				asyncDirectoryProcessor.decryptDirectory(userAction.getPath());// todo- take from db
+				asyncDirectoryProcessor.decryptDirectory(userAction.getPath());
 			}
 		} catch (IOException | InvalidEncryptionAlgorithmTypeException | InterruptedException e) {
 			System.out.println(e);

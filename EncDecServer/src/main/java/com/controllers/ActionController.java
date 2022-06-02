@@ -55,14 +55,14 @@ public class ActionController {
 
         EncryptedFile encryptedFile= new EncryptedFile(encryptRequest.getUsername(), encryptRequest.getEnctype(), encryptRequest.getPath(), key);
         encryptedFileRepository.save(encryptedFile);
-        return ResponseEntity.ok(new MessageResponse("Encrypt file Succesfull"));
+        return ResponseEntity.ok(new MessageResponse("Encrypt file Successful"));
     }
 
     @PostMapping("/decrypt")
     public ResponseEntity<?> decryptFile(@Valid @RequestBody DecryptRequest decryptRequest) {
 
-        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsername(decryptRequest.getUsername());
-
+        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsernameAndPath(decryptRequest.getUsername(), decryptRequest.getPath());
+        //todo- delete from db
         try {
             IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(encryptedFile.getAlgorithm());
             AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, encryptedFile.getKey());
