@@ -1,7 +1,10 @@
 package com.models;
 
+import org.apache.tomcat.jni.Time;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,11 +30,15 @@ public class EncryptedFile {
     @NotBlank
     private int key;
 
+    @NotBlank
+    private LocalTime timestamp;
+
     public EncryptedFile(String username, String algorithm, String path, int key) {
         this.username = username;
         this.algorithm = algorithm;
         this.path = path;
         this.key = key;
+        this.timestamp = LocalTime.now();
     }
 
     public String getId() {
@@ -72,5 +79,13 @@ public class EncryptedFile {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public LocalTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

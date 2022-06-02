@@ -24,7 +24,7 @@ public class FileEncryptorMain {
 				try {
 					if (userAction.getAction().equals("encrypt")) {
 						IEncryptionAlgorithm encryptAlgo = userAction.getAlgoByInput();
-						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, Key.generateKey());
+						AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo,  Key.generateKey());
 						EncryptionEventObserver asyncObserver = new EncryptionEventObserver();
 						asyncDirectoryProcessor.addObserver(asyncObserver);
 
