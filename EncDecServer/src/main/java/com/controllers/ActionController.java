@@ -61,8 +61,7 @@ public class ActionController {
     @PostMapping("/decrypt")
     public ResponseEntity<?> decryptFile(@Valid @RequestBody DecryptRequest decryptRequest) {
 
-        EncryptedFile encryptedFile = encryptedFileService.loadUserByUsernameAndPath(decryptRequest.getUsername(), decryptRequest.getPath());
-        //todo- delete from db
+        EncryptedFile encryptedFile = encryptedFileService.loadTopUsernameAndPathOrderByTimestampDesc(decryptRequest.getUsername(), decryptRequest.getPath());
         try {
             IEncryptionAlgorithm encryptAlgo = userAction.getAlgo(encryptedFile.getAlgorithm());
             AsyncDirectoryProcessor asyncDirectoryProcessor = new AsyncDirectoryProcessor(encryptAlgo, encryptedFile.getKey());
@@ -74,6 +73,9 @@ public class ActionController {
         } catch (InvalidEncryptionAlgorithmTypeException | IOException | InterruptedException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
+
+        // After finish with decryption - delete the element from db
+        encryptedFileService.deleteById(encryptedFile.getId());
 
         return ResponseEntity.ok(new MessageResponse("Decrypt file Successful"));
     }
