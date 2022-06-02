@@ -30,6 +30,15 @@
           Decrypt
         </button>
       </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isDecryptedFailed"
+        >
+          Decrypt failed: We didnt find your folder
+        </div>
+      </div>
     </form>
   <div class="card-container" *ngIf="isDecrypted">
     <div class="success-checkmark">
