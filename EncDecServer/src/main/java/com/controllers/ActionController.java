@@ -75,6 +75,6 @@ public class ActionController {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
 
-        return ResponseEntity.ok(new MessageResponse("Decrypt file Succesfull"));
+        return ResponseEntity.ok(new MessageResponse("Decrypt file Successful"));
     }
 }

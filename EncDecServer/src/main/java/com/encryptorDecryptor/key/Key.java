@@ -42,12 +42,14 @@ public class Key {
 	 * @return
 	 */
 	public static int generateKey() {
-		ArrayList<Integer> arr = getPrimes();
-		Random rand = new Random();
-		int randNum = rand.nextInt(arr.size());
-		int key = arr.get(randNum);
+		int key = (int)((Math.random() * (133))+ 122);
+
+//		ArrayList<Integer> arr = getPrimes();
+//		Random rand = new Random();
+//		int randNum = rand.nextInt(arr.size());
+//		int key = arr.get(randNum);
 		EncryptionLog4JLogger.debug(String.format("value of key is: %d", key), Key.class);
-		return key;	
+		return key;
 	}
 	
 	/**
