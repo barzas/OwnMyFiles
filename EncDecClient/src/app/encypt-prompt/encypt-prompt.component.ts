@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActionService} from '../_services/action.service';
-import {TokenStorageService} from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-encypt-prompt',
@@ -22,7 +21,6 @@ export class EncyptPromptComponent implements OnInit {
   onSubmit() {
     this.actionService.encrypt(this.form).subscribe(
       data => {
-        //TODO
         this.isEncrypted = true;
         this.isEncryptFailed = false;
         this.success();

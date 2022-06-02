@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import {TokenStorageService} from "../_services/token-storage.service";
+import {TokenStorageService} from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
       },
       err => {
         this.errorMessage = err.error.message;
+        console.log(err.message);
         this.isSignUpFailed = true;
       }
     );

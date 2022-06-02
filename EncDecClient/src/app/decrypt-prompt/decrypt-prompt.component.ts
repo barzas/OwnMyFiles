@@ -26,6 +26,7 @@ export class DecryptPromptComponent implements OnInit {
       },
       error => {
         this.errorMessage = error.error.message;
+        console.log(error.message);
         this.isDecryptedFailed = true;
       }
     );

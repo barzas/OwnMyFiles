@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
-        // this.routs.navigateByUrl('/user');
       },
       err => {
         this.errorMessage = err.error.message;
+        console.log(err.message);
         this.isLoginFailed = true;
       }
     );
