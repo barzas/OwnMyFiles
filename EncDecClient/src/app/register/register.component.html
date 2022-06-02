@@ -1,10 +1,4 @@
 <div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
     <form
       *ngIf="!isSuccessful"
       name="form"
@@ -12,12 +6,15 @@
       #f="ngForm"
       novalidate
     >
+      <h3>Sign Up</h3>
       <div class="form-group">
         <label for="username">Username</label>
         <input
+          id="username"
           type="text"
           class="form-control"
           name="username"
+          placeholder="What's your name"
           [(ngModel)]="form.username"
           required
           minlength="3"
@@ -37,9 +34,11 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input
+          id="email"
           type="email"
           class="form-control"
           name="email"
+          placeholder="user@email.com"
           [(ngModel)]="form.email"
           required
           email
@@ -55,9 +54,11 @@
       <div class="form-group">
         <label for="password">Password</label>
         <input
+          id="password"
           type="password"
           class="form-control"
           name="password"
+          placeholder="password"
           [(ngModel)]="form.password"
           required
           minlength="6"
@@ -71,7 +72,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
+        <button>Sign Up</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
@@ -79,7 +80,16 @@
       </div>
     </form>
 
-    <div class="alert alert-success" *ngIf="isSuccessful">
+  <div class="card-container" *ngIf="isSuccessful">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div class="alert alert-success">
       Your registration is successful!
     </div>
   </div>

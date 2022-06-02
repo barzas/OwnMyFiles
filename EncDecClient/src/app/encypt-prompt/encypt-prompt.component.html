@@ -1,26 +1,22 @@
 <div class="col-md-12">
-  <div class="card card-container" *ngIf="!isEncrypted">
-    <img
-      id="profile-img"
-      src="../assets/File_Lock.png"
-      class="profile-img-card"
-    />
-    <form
+    <form *ngIf="!isEncrypted"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
       novalidate
     >
+      <h3>Encrypt</h3>
+      <label class="label" >Insert directory path</label>
       <div class="form-group">
-        <label for="filePath">Insert file path</label>
         <input
           type="text"
-          class="form-control"
+          class="text-input"
           name="filePath"
           [(ngModel)]="form.filePath"
           required
           #filePath="ngModel"
         />
+
         <div
           class="alert alert-danger"
           role="alert"
@@ -30,12 +26,19 @@
         </div>
       </div>
       <label for="type">Choose an encryption option:</label>
-      <select class="encryption" id="type" name="type" [(ngModel)]="form.type" required #type="ngModel">
-        <option type="text" value="ShiftUp">ShiftUp</option>
-        <option type="text" value="Xor">Xor</option>
-        <option type="text" value="ShiftMultiply">ShiftMultiply</option>
-        <option type="text" value="Double">Double</option>
-        <option type="text" value="Repeat">Repeat</option>
+      <select class="encryption"
+              id="type"
+              name="type"
+              [(ngModel)]="form.type"
+              required
+              #type="ngModel"
+      >
+        <option *ngFor="let opt of options"
+                [selected]="opt === ngSelect"
+                [value]="opt"
+        >
+          {{ opt }}
+        </option>
       </select>
       <div
         class="alert alert-danger"
@@ -50,15 +53,17 @@
         </button>
       </div>
     </form>
-  </div>
-  <div class="card card-container" *ngIf="isEncrypted">
-    <img
-      id="done-img"
-      src="../assets/V.png"
-      class="task-done-img"
-    />
+  <div class="card-container" *ngIf="isEncrypted">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
     <div class="alert alert-success">
-      Encrypted Success!!
+      Encrypt Success !
     </div>
   </div>
 </div>

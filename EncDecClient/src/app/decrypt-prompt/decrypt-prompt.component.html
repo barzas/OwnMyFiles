@@ -1,19 +1,15 @@
 <div class="col-md-12">
-  <div class="card card-container" *ngIf="!isDecrypted">
-    <img
-      id="profile-img"
-      src="../assets/File_open.png"
-      class="profile-img-card"
-    />
-    <form
+    <form *ngIf="!isDecrypted"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
       novalidate
     >
+      <h3>Decrypt</h3>
       <div class="form-group">
-        <label for="filePath">Insert file path</label>
+        <label for="filePath">Insert directory path</label>
         <input
+          id="filePath"
           type="text"
           class="form-control"
           name="filePath"
@@ -35,12 +31,18 @@
         </button>
       </div>
     </form>
+  <div class="card-container" *ngIf="isDecrypted">
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div class="alert alert-success">
+      Decrypted Success !
+    </div>
   </div>
-  <img
-    *ngIf="isDecrypted"
-    id="done-img"
-    src="../assets/V.png"
-    class="task-done-img"
-  />
 </div>
 
