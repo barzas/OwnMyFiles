@@ -10,6 +10,7 @@ export class DecryptPromptComponent implements OnInit {
   form: any = {};
   errorMessage = '';
   isDecrypted = false;
+  isDecryptedFailed = false;
 
   constructor(private actionService: ActionService) {
   }
@@ -19,18 +20,22 @@ export class DecryptPromptComponent implements OnInit {
   onSubmit() {
     this.actionService.decrypt(this.form).subscribe(
       data => {
-        //TODO
         this.isDecrypted = true;
-        this.succes();
+        this.isDecryptedFailed = false;
+        this.success();
       },
       error => {
         this.errorMessage = error.error.message;
+        this.isDecryptedFailed = true;
       }
     );
   }
 
-  succes() {
-    window.location.reload();
+  success() {
+    setTimeout(function() {
+      window.location.reload();
+      this.isDecrypted = false;
+    }.bind(this), 2000);
   }
 
 }
