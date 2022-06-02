@@ -93,7 +93,7 @@ public class FileEncryptor extends Observable{
 		notifyEvent(EncryptionEventEnum.DECRYPTION_STARTED, encFilePath, encAlgo, decFilePath, start, this.getClass());
 		Paths.get(decFilePath);
         Paths.get(encFilePath);
- //       Paths.get(keyPath);
+//       Paths.get(keyPath);
         Key key = new Key(this.key);
 		File decFile = new File(decFilePath);
 		File encFile = new File(encFilePath);

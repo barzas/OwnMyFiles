@@ -21,23 +21,7 @@ public class FileThread implements Callable<Integer> {
 		this.operation = operation;
 		this.key = key;
 	}
-	/*
-	@Override
-	public void run() {
-		try {
-			switch(operation) {
-			case ENCRYPT:
-				fileEnc.handleEncryption(filePath, subDirPath, keyPath);
-				break;
-		
-			case DECRYPT:
-				fileEnc.handleDecryption(filePath, subDirPath, keyPath);
-				break;
-			}	
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}*/
+
 
 	@Override
 	public Integer call() throws Exception {
