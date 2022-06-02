@@ -36,7 +36,7 @@ public class EncryptedFile {
     @NotBlank
     private LocalTime timestamp;
 
-    public EncryptedFile(String username, String algorithm, String path, int key) {
+    public EncryptedFile(String username, String algorithm, String path, int key, int secondKey) {
         this.username = username;
         this.algorithm = algorithm;
         this.path = path;
